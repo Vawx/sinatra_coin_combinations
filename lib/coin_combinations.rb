@@ -1,15 +1,25 @@
+require('pry')
 class Fixnum
   coin_types_singlular = { 1 => " cent",
                            5 => " nickel",
                            10 => " dime",
                            25 => " quarter"}
 
-  coin_types_plural = { 1 => " cents",
-                        5 => " nickels",
-                        10 => " dimes",
-                        25 => " quarters" }
+  coin_types_plural =     { 1 => " cents",
+                            5 => " nickels",
+                            10 => " dimes",
+                            25 => " quarters" }
 
-  define_method(:coin_combinations) do
+  coin_amounts =          { "quarters" => 0,
+                            "dimes" => 0,
+                            "nickles" => 0 }
+
+  define_method(:coin_combinations) do |register_coins|
+
+    coin_amounts["quarters"] = register_coins[ 0 ]
+    coin_amounts["dimes"] = register_coins[ 1 ]
+    coin_amounts["nickles"] = register_coins[ 2 ]
+
     case self
       when 1..4
         pennies(self)
@@ -18,7 +28,7 @@ class Fixnum
       when 10..24
         dimes(self)
       when 25..50000
-        quaters(self)
+        quarters(self)
     end
   end
 
@@ -70,26 +80,34 @@ class Fixnum
     end
   end
 
-  define_method(:quaters) do |quarter|
+  define_method(:quarters) do |quarter|
     remainder = quarter % 25
-    how_many_quaters = (quarter - remainder) / 25
-    quaters_as_word = ""
+    how_many_quarters = (quarter - remainder) / 25
+    quarters_as_word = ""
 
-    if how_many_quaters == 1
-      quaters_as_word = how_many_quaters.to_s + coin_types_singlular.fetch( 25 )
+    if coin_amounts.fetch("quarters") > 0
+      if how_many_quarters > coin_amounts.fetch("quarters")
+        dime_conversion = (how_many_quarters - coin_amounts.fetch("quarters")) * 25
+        remainder += dime_conversion
+        how_many_quarters = coin_amounts.fetch("quarters")
+      end
+    end
+
+    if how_many_quarters == 1
+      quarters_as_word = how_many_quarters.to_s + coin_types_singlular.fetch( 25 )
     else
-      quaters_as_word = how_many_quaters.to_s + coin_types_plural.fetch( 25 )
+      quarters_as_word = how_many_quarters.to_s + coin_types_plural.fetch( 25 )
     end
 
     if remainder == 0
-      return quaters_as_word
+      return quarters_as_word
     else
       if remainder > 9
-        return quaters_as_word + " " +  dimes(remainder)
+        return quarters_as_word + " " +  dimes(remainder)
       elsif remainder > 4
-        return quaters_as_word + " " +  nickles(remainder)
+        return quarters_as_word + " " +  nickles(remainder)
       else
-        return quaters_as_word + " " +  pennies(remainder)
+        return quarters_as_word + " " +  pennies(remainder)
       end
     end
   end

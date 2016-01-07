@@ -12,3 +12,12 @@
 .change_header {
   font-family: 'Oswald'
 }
+
+.question {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.register_input {
+  padding: 42px;
+}
