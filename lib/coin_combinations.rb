@@ -1,10 +1,10 @@
 class Fixnum
-  coin_types_singlular = { 1 => " penny",
+  coin_types_singlular = { 1 => " cent",
                            5 => " nickel",
                            10 => " dime",
                            25 => " quarter"}
 
-  coin_types_plural = { 1 => " pennies",
+  coin_types_plural = { 1 => " cents",
                         5 => " nickels",
                         10 => " dimes",
                         25 => " quarters" }
@@ -13,39 +13,66 @@ class Fixnum
     case self
       when 1..4
         #PENNIES
-        pennies()
+        pennies(self)
       when 5..9
         #NICKLES
-        nickles()
+        nickles(self)
       when 10..24
         #DIMES
+        dimes(self)
       when 25..99
         #QUATERS
     end
   end
 
-  define_method(:pennies) do
-    if self == 1
-      return self.to_s + coin_types_singlular.fetch( 1 )
+  define_method(:pennies) do |penny|
+    if penny == 1
+      return penny.to_s + coin_types_singlular.fetch( 1 )
     else
-      return self.to_s + coin_types_plural.fetch( 1 )
+      return penny.to_s + coin_types_plural.fetch( 1 )
     end
   end
 
-  define_method(:nickles) do
-    remainder = self % 5
-    how_many_nickles = (self - remainder) / 5
+  define_method(:nickles) do |nickle|
+    remainder = nickle % 5
+    how_many_nickles = (nickle - remainder) / 5
 
-    if how_many_nickles == 1
-      return how_many_nickles.to_s + coin_types_singlular.fetch( 5 )
+    if remainder == 0
+      if how_many_nickles == 1
+        return how_many_nickles.to_s + coin_types_singlular.fetch( 5 )
+      else
+        return how_many_nickles.to_s + coin_types_plural.fetch( 5 )
+      end
     else
-      return how_many_nickles.to_s + coin_types_plural.fetch( 5 )
+      pennies(remainder)
     end
   end
 
-  define_method(:dimes) do
-    remainder = self % 10
-    how_many_dimes = ( self - remainder ) / 10
+  define_method(:dimes) do |dime|
+    remainder = dime % 10
+    how_many_dimes = ( dime - remainder ) / 10
+
+    if remainder == 0 && how_many_dimes <= 2
+      if how_many_dimes == 1
+        return how_many_dimes.to_s + coin_types_singlular.fetch( 10 )
+      else
+        return how_many_dimes.to_s + coin_types_plural.fetch( 10 )
+      end
+    else
+      if remainder > 4
+        if how_many_dimes == 1
+          return how_many_dimes.to_s + coin_types_singlular.fetch( 10 ) + " " + nickels(remainder)
+        else
+          return how_many_dimes.to_s + coin_types_plural.fetch( 10 ) + " " + nickles(remainder)
+        end
+      else
+        if how_many_dimes == 1
+          return how_many_dimes.to_s + coin_types_singlular.fetch( 10 ) +  " " + pennies(remainder)
+        else
+          return how_many_dimes.to_s + coin_types_plural.fetch( 10 ) + " " + pennies(remainder)
+        end
+      end
+    end
   end
 
 
