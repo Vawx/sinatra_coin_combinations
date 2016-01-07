@@ -33,15 +33,18 @@ class Fixnum
   define_method(:nickles) do |nickle|
     remainder = nickle % 5
     how_many_nickles = (nickle - remainder) / 5
+    nickles_as_word = ""
+
+    if how_many_nickles == 1
+      nickles_as_word = how_many_nickles.to_s + coin_types_singlular.fetch( 5 )
+    else
+      nickles_as_word how_many_nickles.to_s + coin_types_plural.fetch( 5 )
+    end
 
     if remainder == 0
-      if how_many_nickles == 1
-        return how_many_nickles.to_s + coin_types_singlular.fetch( 5 )
-      else
-        return how_many_nickles.to_s + coin_types_plural.fetch( 5 )
-      end
+      return nickles_as_word
     else
-      pennies(remainder)
+      return nickles_as_word.to_s + " " + pennies(remainder)
     end
   end
 

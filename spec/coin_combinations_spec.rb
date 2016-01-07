@@ -23,4 +23,16 @@ describe('Fixnum#coin_combinations') do
   it('gives 3 quaters when change is 75 cents') do
     expect(75.coin_combinations).to(eq("3 quarters"))
   end
+  it('gives 3 quarters 1 nickel and 4 pennies when change is 84 cents') do
+    expect(84.coin_combinations).to(eq("3 quarters 1 nickel 4 cents"))
+  end
+  it('gives 3 quarters 2 dimes and 4 cents when change is 99 cents') do
+    expect(99.coin_combinations).to(eq("3 quarters 2 dimes 4 cents"))
+  end
+  it('gives 2 quarters and 4 cents when change is 54') do
+    expect(54.coin_combinations).to(eq("2 quarters 4 cents"))
+  end
+  it('gives 2 quarters 2 dimes and two cents when change is 72') do
+    expect(72.coin_combinations).to(eq("2 quarters 2 dimes 2 cents"))
+  end
 end
