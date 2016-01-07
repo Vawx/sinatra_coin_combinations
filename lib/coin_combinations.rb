@@ -12,16 +12,13 @@ class Fixnum
   define_method(:coin_combinations) do
     case self
       when 1..4
-        #PENNIES
         pennies(self)
       when 5..9
-        #NICKLES
         nickles(self)
       when 10..24
-        #DIMES
         dimes(self)
       when 25..99
-        #QUATERS
+        quaters(self)
     end
   end
 
@@ -75,5 +72,10 @@ class Fixnum
     end
   end
 
+  define_method(:quaters) do |quarter|
+    remainder = quarter % 25
+    how_many_quaters = (quarter - remainder) / 25
+    return how_many_quaters.to_s + coin_types_singlular.fetch( 25 )
+  end
 
 end
