@@ -17,7 +17,7 @@ class Fixnum
         nickles(self)
       when 10..24
         dimes(self)
-      when 25..99
+      when 25..50000
         quaters(self)
     end
   end

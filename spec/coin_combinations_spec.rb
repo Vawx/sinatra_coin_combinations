@@ -35,4 +35,10 @@ describe('Fixnum#coin_combinations') do
   it('gives 2 quarters 2 dimes and two cents when change is 72') do
     expect(72.coin_combinations).to(eq("2 quarters 2 dimes 2 cents"))
   end
+  it('handles a larger change amount') do
+    expect(200.coin_combinations).to(eq("8 quarters"))
+  end
+  it('handles a very large change anount') do
+    expect(5332.coin_combinations).to(eq("213 quarters 1 nickel 2 cents"))
+  end
 end
