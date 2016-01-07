@@ -5,21 +5,18 @@
   </div>
 </div>
 
+<form action="/change" >
  <div class="container">
   <div class="row">
     <div class="col-sm-4 col-sm-offset-4">
-      <form action="/change" >
         <div class="form-group">
           <div class="wrapper" style="text-align: center;">
             <label class="question" for="register">What would you like to make change for?</label>
           </div>
           <input type="text" id="change" name="change" class="form-control">
         </div>
-        <div class="wrapper" style="text-align: center;">
-          <button type="submit" name="button" id="send">Get Change</button>
-        </div>
       </div>
-  </div>
+    </div>
 
   <div class="row">
     <div class="col-sm-4 col-sm-offset-4">
@@ -28,7 +25,7 @@
               <label class="question" for="register">What change does the register have? (0 is infinite)</label>
             </div>
             <div class="wrapper" style="text-align: center;">
-              <label for="change">Quarters</label>
+              <label for="register">Quarters</label>
               <input type="text" id="register_quarters" name="register_quarters" class="form-control" value="0">
             </div>
             <div class="wrapper" style="text-align: center;">
@@ -39,6 +36,9 @@
               <label for="register">Nickles</label>
               <input type="text" id="register_nickles" name="register_nickles" class="form-control" value="0">
             </div>
+          </div>
+          <div class="wrapper" style="text-align: center;">
+            <button type="submit" name="send" id="send">send</button>
           </div>
         </div>
       </div>

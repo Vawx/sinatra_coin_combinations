@@ -44,4 +44,7 @@ describe('Fixnum#coin_combinations') do
   it('handles a limited amount of quarters') do
     expect(100.coin_combinations([3,0,0])).to(eq("3 quarters 2 dimes 1 nickel"))
   end
+  it('handles a limited amount of dimes') do
+    expect(65.coin_combinations([1,3,0])).to(eq("1 quarter 3 dimes 2 nickels"))
+    end
 end

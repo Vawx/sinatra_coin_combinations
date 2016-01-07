@@ -11,6 +11,7 @@ end
 
 get('/change') do
   @input_change_string = params.fetch('change')
+
   if @input_change_string.input_is_integer
     @convert_change = @input_change_string.to_i
     @register_quarters = params.fetch('register_quarters')
