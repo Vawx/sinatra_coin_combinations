@@ -48,26 +48,21 @@ class Fixnum
   define_method(:dimes) do |dime|
     remainder = dime % 10
     how_many_dimes = ( dime - remainder ) / 10
+    dimes_as_word = ""
 
-    if remainder == 0 && how_many_dimes <= 2
-      if how_many_dimes == 1
-        return how_many_dimes.to_s + coin_types_singlular.fetch( 10 )
-      else
-        return how_many_dimes.to_s + coin_types_plural.fetch( 10 )
-      end
+    if how_many_dimes == 1
+      dimes_as_word = how_many_dimes.to_s + coin_types_singlular.fetch( 10 )
+    else
+      dimes_as_word = how_many_dimes.to_s + coin_types_plural.fetch( 10 )
+    end
+
+    if remainder == 0
+      return dimes_as_word
     else
       if remainder > 4
-        if how_many_dimes == 1
-          return how_many_dimes.to_s + coin_types_singlular.fetch( 10 ) + " " + nickels(remainder)
-        else
-          return how_many_dimes.to_s + coin_types_plural.fetch( 10 ) + " " + nickles(remainder)
-        end
+        return dimes_as_word + " " + nickles(remainder)
       else
-        if how_many_dimes == 1
-          return how_many_dimes.to_s + coin_types_singlular.fetch( 10 ) +  " " + pennies(remainder)
-        else
-          return how_many_dimes.to_s + coin_types_plural.fetch( 10 ) + " " + pennies(remainder)
-        end
+        return dimes_as_word + " " + pennies(remainder)
       end
     end
   end
@@ -75,15 +70,24 @@ class Fixnum
   define_method(:quaters) do |quarter|
     remainder = quarter % 25
     how_many_quaters = (quarter - remainder) / 25
+    quaters_as_word = ""
 
-    if remainder == 0
-      if how_many_quaters == 1
-        return how_many_quaters.to_s + coin_types_singlular.fetch( 25 )
-      else
-        return how_many_quaters.to_s + coin_types_plural.fetch( 25 )
-      end
+    if how_many_quaters == 1
+      quaters_as_word = how_many_quaters.to_s + coin_types_singlular.fetch( 25 )
+    else
+      quaters_as_word = how_many_quaters.to_s + coin_types_plural.fetch( 25 )
     end
 
+    if remainder == 0
+      return quaters_as_word
+    else
+      if remainder > 9
+        return quaters_as_word + " " +  dimes(remainder)
+      elsif remainder > 4
+        return quaters_as_word + " " +  nickles(remainder)
+      else
+        return quaters_as_word + " " +  pennies(remainder)
+      end
+    end
   end
-
 end
