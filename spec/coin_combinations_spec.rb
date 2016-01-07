@@ -20,4 +20,7 @@ describe('Fixnum#coin_combinations') do
   it('gives 1 quater when change is 25 cents') do
     expect(25.coin_combinations).to(eq("1 quarter"))
   end
+  it('gives 3 quaters when change is 75 cents') do
+    expect(75.coin_combinations).to(eq("3 quarters"))
+  end
 end

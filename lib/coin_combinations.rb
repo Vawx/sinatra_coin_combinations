@@ -75,7 +75,15 @@ class Fixnum
   define_method(:quaters) do |quarter|
     remainder = quarter % 25
     how_many_quaters = (quarter - remainder) / 25
-    return how_many_quaters.to_s + coin_types_singlular.fetch( 25 )
+
+    if remainder == 0
+      if how_many_quaters == 1
+        return how_many_quaters.to_s + coin_types_singlular.fetch( 25 )
+      else
+        return how_many_quaters.to_s + coin_types_plural.fetch( 25 )
+      end
+    end
+
   end
 
 end
